@@ -1,0 +1,1 @@
+See [2024 Hugo Voting Statistics](https://glasgow2024.org/wp-content/uploads/2024/08/2024_hugo_statistics.pdf) for input data.
