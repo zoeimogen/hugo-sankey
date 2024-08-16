@@ -1,0 +1,1 @@
+https://www.thehugoawards.org/content/pdf/2022-Hugo-Award-Details-Final.pdf
