@@ -22,8 +22,8 @@ title: Visualising the Hugo Awards
 email: zoe@zoeoconnell.co.uk
 description: >- # this means to ignore newlines until "baseurl:"
   A Sankey visualisation of the World Science Fiction Society's Hugo Awards nomination and voting
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://zoeimogen.github.io/hugo-sankey/" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/hugo-sankey" # the subpath of your site, e.g. /blog
+url: "https://zoeimogen.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: jekyllrb
 github_username:  zoeimogen
 
