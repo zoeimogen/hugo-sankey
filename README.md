@@ -1,5 +1,6 @@
 # Visualsing the Hugos
 
+If you just want to see the resulting graphs, [see here](https://zoeimogen.github.io/hugo-sankey/)
 ## Basic use
 
 Converts Hugo voting data into pretty graphs. For basic use, as long as you have [python](https://www.python.org/downloads/) installed,
