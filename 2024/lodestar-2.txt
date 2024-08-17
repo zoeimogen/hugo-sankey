@@ -1,0 +1,6 @@
+Daughter 258 258 311 398 494 
+Booksellers 244 245 272 316 396 
+Unraveller 231 231 250 269 
+Promises 190 190 235 
+Abeni’s Song 180 180 
+No Award 36

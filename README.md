@@ -1,4 +1,6 @@
-# Basic use
+# Visualsing the Hugos
+
+## Basic use
 
 Converts Hugo voting data into pretty graphs. For basic use, as long as you have [python](https://www.python.org/downloads/) installed,
 this should work with the provided input files. The input is simply copied and pasted from the
@@ -17,7 +19,7 @@ Or you can use the `-u` argument to get a direct URL:
     % ./generate_sankey.py -u 2024/best-novel-1.txt 
     https://www.sankeymatic.com/build/?i=MoewtgpgBAIhDOAHCAnAhgF2gcQD...
 
-# Advanced users
+## Advanced users
 
 For the hardcore user, if you have selenium installed then you can rapidly generate all the PNGs:
 

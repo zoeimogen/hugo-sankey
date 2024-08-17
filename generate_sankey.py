@@ -80,17 +80,27 @@ meta mentionsankeymatic Y
   listimbalances Y
 '''
 
-def read_candidates_from_file(filename):
+def read_candidates_from_file(filename, eph):
     '''Read candidates from file. (stdin or filename on command line)'''
     candidates = {}
+    if eph:
+        # EPH data: vote counts are floats
+        r = re.compile(r'^(.*?)(\d+[\d\s.]*)$')
+    else:
+        r = re.compile(r'^(.*?)(\d+[\d\s]*)$')
+
     with open(filename, 'r') as f:
         for line in f:
             # This breaks on things like "Baldur's Gate 3" because "3" looks like a first round
             # vote count.
-            match = re.match(r'^(.*?)(\d+[\d\s]*)$', line.strip())
+            match = r.match(line.strip())
             if match:
                 candidate = match.group(1).strip()
-                votes = list(map(int, match.group(2).split()))
+                if eph:
+                    # Floats and skip the first number (Raw nominations, uninteresting under EPH)
+                    votes = list(map(float, match.group(2).split()))[1:]
+                else:
+                    votes = list(map(int, match.group(2).split()))
                 candidates[candidate] = votes
     return candidates
 
@@ -101,7 +111,14 @@ def next_round_votes(candidates, i, x):
     except IndexError:
         return 0
 
-def print_transfers(candidates, rounds):
+
+def vote_fmt(votes, eph):
+    if eph:
+        return(f'{votes:.2f}')
+    else:
+        return(f'{votes}')
+
+def print_transfers(candidates, rounds, eph, offset):
     '''Print the transfers for each round'''
 
     # Some data is cached and output last - the order in which a candidate is mentioned for each
@@ -124,7 +141,7 @@ def print_transfers(candidates, rounds):
         for c in sorted_candidates:
             if len(candidates[c]) > i+1:
                 # Transfer all the existing votes for this candidate to the next round
-                output += f"{c}\\nRound {i + 1} [{candidates[c][i]}] {c}\\nRound {i + 2}\n"
+                output += f"{c}\\nRound {i + 1} [{vote_fmt(candidates[c][i], eph)}] {c}\\nRound {i + 2}\n"
             else:
                 # Eliminate a candidate and transfer their votes, based on the diff to the next
                 # round totals. Order matters here to put flows in the correct order on the output
@@ -136,10 +153,10 @@ def print_transfers(candidates, rounds):
                     total += diff
                     if diff > 0:
                         # Don't bother outputting zero transfers.
-                        transfer_output.append(f"{c}\\nRound {i + 1} [{diff}] {t}\\nRound {i + 2}")
+                        transfer_output.append(f"{c}\\nRound {i + 1 + offset} [{vote_fmt(diff, eph)}] {t}\\nRound {i + 2 + offset}")
                 remainder = candidates[c][i] - total
                 if remainder > 0:
-                    no_transfer.append(f"{c}\\nRound {i + 1} [{remainder}] No Transfer")
+                    no_transfer.append(f"{c}\\nRound {i + 1 + offset} [{vote_fmt(remainder, eph)}] No Transfer")
 
     output += '\n'.join(transfer_output) + '\n'
 
@@ -205,6 +222,14 @@ def main():
                         type=int,
                         default=800)
 
+    parser.add_argument('--eph',
+                    action='store_true',
+                    help='Input data is E Pluribus Hugo format (Nominations data)')
+    
+    parser.add_argument('--initial-round',
+                    help='Set initial round nubmber (Used for EPH nominations)',
+                    default=1, type=int)
+
     parser.add_argument('-s', '--stdout',
                     action='store_true',
                     help='Output to stdout insted of file (for non-batch use)')
@@ -231,10 +256,10 @@ def main():
         print("You need a working Selenium/Firefox install. This is intended for expert users only, see https://pypi.org/project/selenium/")
         exit(-1)
 
-    candidates = read_candidates_from_file(args.filename)
+    candidates = read_candidates_from_file(args.filename, args.eph)
     rounds = max(len(votes) for votes in candidates.values())
 
-    output = print_transfers(candidates, rounds)
+    output = print_transfers(candidates, rounds, args.eph, args.initial_round - 1)
 
     # Don't use Jinja so users don't need to install extra stuff if not using -u or --selenium
     output += SANKEY_SETTINGS.replace('%WIDTH%', f'{args.width}').replace('%HEIGHT%', f'{args.height}')
