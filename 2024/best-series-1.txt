@@ -1,4 +1,4 @@
-Imperial Radch 553 554 597 677 822 1045 1345
+Imperial Radch 553 554 597 677 822 1045
 October Daye 346 346 375 412 438 529
 Laundry Files 318 321 334 355 436
 Final Architecture, The 275 276 296 328

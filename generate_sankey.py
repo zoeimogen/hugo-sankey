@@ -141,7 +141,7 @@ def print_transfers(candidates, rounds, eph, offset):
         for c in sorted_candidates:
             if len(candidates[c]) > i+1:
                 # Transfer all the existing votes for this candidate to the next round
-                output += f"{c}\\nRound {i + 1} [{vote_fmt(candidates[c][i], eph)}] {c}\\nRound {i + 2}\n"
+                output += f"{c}\\nRound {i + 1 + offset} [{vote_fmt(candidates[c][i], eph)}] {c}\\nRound {i + 2 + offset}\n"
             else:
                 # Eliminate a candidate and transfer their votes, based on the diff to the next
                 # round totals. Order matters here to put flows in the correct order on the output

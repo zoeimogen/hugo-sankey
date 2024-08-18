@@ -7,7 +7,58 @@ layout: default
 
 # Visualising the Hugo Awards 2024
 
-Original voting data is available on the [Glasgow 2024 web site](https://glasgow2024.org/wp-content/uploads/2024/08/2024_hugo_statistics.pdf).
+## How does this work?
+
+Voting on Hugo and related award finalists is the fairly simple
+"[Alternative Vote](https://www.electoral-reform.org.uk/voting-systems/types-of-voting-system/alternative-vote/)"
+system, also known as "Instant Runoff Voting" in the United States.
+In this system, voters simply rank their choices and the candidate
+with the least first-placed votes is eliminated, with those ballots
+going to the second-placed candidate. This can seem quite complicated, but
+it ensures winners have broad support and  Sankey diagrams such as these
+should make it clear how it all works.
+
+More critically, these graphs show the importance of voting for all the
+candidates you have a preference for: in several cases, the winner was not
+the person or work with the most first preferences. Nerds of a Feather and Saga 11
+both won despite placing third in first preferences.
+
+Nominations are run on the E Pluribus Hugo system, which is similar in principle
+(run multiple rounds and eliminate last place) but with changes to cope with the
+fact that nominations are unranked. In short, you get one point which is split amongst
+your nominations in a given category so if you have one nomination, it gets one point,
+two nominations would get half a point each and so on.
+
+If you think all this is overly complicated and unnecessary - it's not. The right-wing
+[Sad Puppies](https://en.wikipedia.org/wiki/Sad_Puppies) campaign succeded in
+getting their nomination slates as finalists under the precursor nomination system
+but couldn't win any actual awards under Alternative Vote.
+
+More detail on the voting system is available from the [Hugo Awards site](https://www.thehugoawards.org/the-voting-system/),
+and original 2024 voting data is on the [Glasgow 2024 web site](https://glasgow2024.org/wp-content/uploads/2024/08/2024_hugo_statistics.pdf).
+
+## FAQs
+
+* Why doesn't X have a round 6?
+
+Once a candidate has half the votes, counting stops: nobody else can win.
+
+* Why are some of the candidates off to one side in the nominations?
+
+This is a bug, the system used to generate the graph positions can't figure out how to position
+a node where there are no flows to or from it.
+
+* Why so few "No Transfers" for nominations?
+
+We don't have data for nomination rounds except the last 10, which (typically) represents the
+final 16 candidates. This means we don't know the total number of no transfers, so this is a
+low number. Not displaying the transfers causes issues for the system used to generate the graphs.
+(The candidate eliminated in the first displayed round would have the wrong number of points)
+
+* Why isn't the nomination with the least points always eliminated?
+
+E Pluribus Hugo eliminates whichever of the last two candidates has the least overall nominations, regardless
+of points. This isn't shown on the graphs, but you can check the raw voting data to see it.
 
 ## Best Novel
 
@@ -35,10 +86,10 @@ Original voting data is available on the [Glasgow 2024 web site](https://glasgow
 ## Best Short Story
 
 **Voting**
-[![2024 Best Short Story voting](2024/best-short-1.png)](2024/best-short-1.png)
+[![2024 Best Short Story voting](2024/best-short-story-1.png)](2024/best-short-story-1.png)
 
 **Nominations**
-[![2024 Best Short Story nominations](2024/best-short-nominations.png)](2024/best-short-nominations.png)
+[![2024 Best Short Story nominations](2024/best-short-story-nominations.png)](2024/best-short-story-nominations.png)
 
 ## Best Series
 
@@ -56,13 +107,13 @@ Original voting data is available on the [Glasgow 2024 web site](https://glasgow
 **Nominations**
 [![2024 Best Graphic Story or Comic nominations](2024/best-graphic-story-nominations.png)](2024/best-graphic-story-nominations.png)
 
-## Best Releated Work
+## Best Related Work
 
 **Voting**
-[![2024 Best Releated Work voting](2024/best-related-work-1.png)](2024/best-related-work-1.png)
+[![2024 Best Related Work voting](2024/best-related-work-1.png)](2024/best-related-work-1.png)
 
 **Nominations**
-[![2024 Best Releated Work nominations](2024/best-related-work-nominations.png)](2024/best-related-work-nominations.png)
+[![2024 Best Related Work nominations](2024/best-related-work-nominations.png)](2024/best-related-work-nominations.png)
 
 ## Best Dramatic Presentation, Long Form
 
